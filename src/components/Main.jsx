@@ -2,6 +2,7 @@ import MoviesList from "./MoviesList";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AddMovieForm from "./AddMovieForm";
+import Alert from "./Alert";
 
 const Main = () => {
   const [movies, setMovies] = useState([]);
@@ -88,13 +89,7 @@ const Main = () => {
               </button>
             </div>
           </div>
-          <div className="col-12">
-            {alert.show && (
-              <div className={`alert alert-${alert.status}`}>
-                {alert.message}
-              </div>
-            )}
-          </div>
+          <div className="col-12">{alert.show && <Alert alert={alert} />}</div>
           {showAddFilmForm && (
             <AddMovieForm
               formData={formData}
