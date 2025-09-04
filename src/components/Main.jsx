@@ -4,6 +4,7 @@ import axios from "axios";
 import AddMovieForm from "./AddMovieForm";
 import Alert from "./Alert";
 import SearchBar from "./SearchBar";
+import FilterCategories from "./FilterCategories";
 
 const Main = () => {
   // variabili di stato
@@ -12,13 +13,15 @@ const Main = () => {
   const [search, setSearch] = useState("");
   const [categories, setCategories] = useState([]);
   const [showAddFilmForm, setShowAddFilmForm] = useState(false);
+  const [categoryFilter, setCategoryFilter] = useState("");
+
+  const [alert, setAlert] = useState({ show: false, status: "", message: "" });
   const [formData, setFormData] = useState({
     name: "",
     category: "",
     img: "",
     plot: "",
   });
-  const [alert, setAlert] = useState({ show: false, status: "", message: "" });
 
   //   caricamento dei film e creazione dell'array delle categorie
   useEffect(() => {
@@ -43,12 +46,22 @@ const Main = () => {
 
   //   filtraggio per nome del film
   useEffect(() => {
-    const tempMovies = movies.filter((movie) =>
-      movie.name.toLowerCase().includes(search.toLowerCase())
-    );
+    let tempMovies = movies;
+
+    if (search) {
+      tempMovies = tempMovies.filter((movie) =>
+        movie.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    if (categoryFilter) {
+      tempMovies = tempMovies.filter(
+        (movie) => movie.category === categoryFilter
+      );
+    }
 
     setFilteredMovies(tempMovies);
-  }, [search, movies]);
+  }, [search, categoryFilter, movies]);
 
   //   funzione che aggiunge il film all'array
   const handleSubmitForm = () => {
@@ -108,6 +121,13 @@ const Main = () => {
           )}
           <div className="col-12">
             <SearchBar setSearch={setSearch} search={search} />
+          </div>
+          <div className="col-12">
+            <FilterCategories
+              categories={categories}
+              setCategoryFilter={setCategoryFilter}
+              categoryFilter={categoryFilter}
+            />
           </div>
           <MoviesList movies={filteredMovies} />
         </div>
