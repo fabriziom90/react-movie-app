@@ -1,0 +1,71 @@
+header, footer{
+  background-color: #001533;
+}
+
+header #logo img{
+  width: 75px;
+}
+
+nav ul li{
+  margin: 10px 10px 0px 10px;
+}
+
+nav ul li a{
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+nav ul li a:hover{
+  color: #00E666;
+}
+
+.card-movie{
+  height: 600px;
+  position: relative;
+}
+
+.card-movie img{
+  object-fit: cover;
+  height: 100%;
+  width: 100%
+}
+
+.overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #001533;
+  color: #fff;
+  opacity: 0;
+  transition: 0.3s;
+  padding: 25px;
+}
+
+.overlay p, .overlay strong, .overlay em{
+  font-size: 18px;
+}
+
+.card-movie:hover .overlay{
+  opacity: 1
+}
+
+a.btn-green, button.btn-green{
+  background-color: #00E666;
+  color: #fff;
+}
+
+button.btn-blue{
+  background-color: #001533;
+  color: #fff;
+}
+
+.create-form{
+  padding: 30px;
+  background-color:#001533;
+  border-radius: 20px;
+}
