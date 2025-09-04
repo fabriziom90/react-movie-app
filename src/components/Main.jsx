@@ -6,9 +6,11 @@ import Alert from "./Alert";
 import SearchBar from "./SearchBar";
 
 const Main = () => {
+  // variabili di stato
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState(movies);
   const [search, setSearch] = useState("");
+  const [categories, setCategories] = useState([]);
   const [showAddFilmForm, setShowAddFilmForm] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -17,8 +19,8 @@ const Main = () => {
     plot: "",
   });
   const [alert, setAlert] = useState({ show: false, status: "", message: "" });
-  const [categories, setCategories] = useState([]);
 
+  //   caricamento dei film e creazione dell'array delle categorie
   useEffect(() => {
     axios
       .get(
@@ -39,6 +41,7 @@ const Main = () => {
       });
   }, []);
 
+  //   filtraggio per nome del film
   useEffect(() => {
     const tempMovies = movies.filter((movie) =>
       movie.name.toLowerCase().includes(search.toLowerCase())
@@ -47,13 +50,17 @@ const Main = () => {
     setFilteredMovies(tempMovies);
   }, [search, movies]);
 
+  //   funzione che aggiunge il film all'array
   const handleSubmitForm = () => {
+    // creo il nuovo film
     const newMovie = {
       id: movies[movies.length - 1].id + 1,
       ...formData,
     };
 
+    // modifico il valore della variabile di stato movies aggiungendo un nuovo film all'array
     setMovies([...movies, newMovie]);
+    // nascondo la form e ne svuoto i campi input
     setShowAddFilmForm(false);
     setFormData({
       name: "",
