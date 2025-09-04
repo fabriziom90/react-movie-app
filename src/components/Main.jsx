@@ -15,6 +15,7 @@ const Main = () => {
     plot: "",
   });
   const [alert, setAlert] = useState({ show: false, status: "", message: "" });
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     axios
@@ -23,6 +24,16 @@ const Main = () => {
       )
       .then((resp) => {
         setMovies(resp.data);
+
+        const tempCategories = [];
+
+        resp.data.forEach((movie) => {
+          if (!tempCategories.includes(movie.category)) {
+            tempCategories.push(movie.category);
+          }
+        });
+
+        setCategories(tempCategories);
       });
   }, []);
 
@@ -92,6 +103,7 @@ const Main = () => {
               formData={formData}
               setFormData={setFormData}
               handleSubmit={handleSubmitForm}
+              categories={categories}
             />
           )}
           <div className="col-12">

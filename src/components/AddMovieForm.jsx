@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const AddMovieForm = ({ formData, setFormData, handleSubmit }) => {
+const AddMovieForm = ({ formData, setFormData, handleSubmit, categories }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     const newObj = {
@@ -40,16 +40,9 @@ const AddMovieForm = ({ formData, setFormData, handleSubmit }) => {
               onChange={handleChange}
             >
               <option value="">Seleziona categoria</option>
-              <option value="Comico">Comico</option>
-              <option value="Fantasy">Fantasy</option>
-              <option value="Thriller">Thriller</option>
-              <option value="Distopico">Distopico</option>
-              <option value="Western">Western</option>
-              <option value="Pulp">Pulp</option>
-              <option value="Fantascienza">Fantascienza</option>
-              <option value="Biografico">Biografico</option>
-              <option value="Drammatico">Drammatico</option>
-              <option value="Azione">Azione</option>
+              {categories.map((category) => (
+                <option value={category}>{category}</option>
+              ))}
             </select>
           </div>
           <div className="col-12 col-md-4">
