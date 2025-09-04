@@ -45,12 +45,6 @@ const Main = () => {
     setFilteredMovies(tempMovies);
   }, [search, movies]);
 
-  const showForm = () => {
-    const flag = !showAddFilmForm;
-
-    setShowAddFilmForm(flag);
-  };
-
   const handleSubmitForm = () => {
     const newMovie = {
       id: movies[movies.length - 1].id + 1,
@@ -86,7 +80,10 @@ const Main = () => {
           <div className="col-12">
             <div className="d-flex justify-content-between">
               <h2>I nostri film</h2>
-              <button className="btn btn-blue" onClick={() => showForm()}>
+              <button
+                className="btn btn-blue"
+                onClick={() => setShowAddFilmForm(!showAddFilmForm)}
+              >
                 Aggiungi film
               </button>
             </div>
