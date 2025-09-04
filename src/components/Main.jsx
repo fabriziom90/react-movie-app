@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import AddMovieForm from "./AddMovieForm";
 import Alert from "./Alert";
+import SearchBar from "./SearchBar";
 
 const Main = () => {
   const [movies, setMovies] = useState([]);
@@ -99,13 +100,7 @@ const Main = () => {
             />
           )}
           <div className="col-12">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Cerca film"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
+            <SearchBar setSearch={setSearch} search={search} />
           </div>
           <MoviesList movies={filteredMovies} />
         </div>
